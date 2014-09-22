@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>One Click Cozy</title>
     <style>
       @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 
@@ -20,6 +20,8 @@
         margin: 5px;
         border: 2px solid black;
         vertical-align: middle;
+      }
+      #results img {
         width: 75px;
         height: 75px;
       }
@@ -35,6 +37,11 @@
         cursor: pointer;
         padding: 0 5px;
       }
+      footer span.prev, #photo {
+        display: none;
+      }
+
+
     </style>
 
     <!--
@@ -47,6 +54,7 @@
     <script src="popup.js"></script>
   </head>
   <body>
+    <div id='photo'><img src='' /></div>
     <div id='results'></div>
     <footer>
       <select>
@@ -57,7 +65,7 @@
       <input type="text" class="search" name="search">
       <span class="search fontawesome-search"></span> 
       <span data-page="1" class="home fontawesome-double-angle-left"></span> 
-      <span style="display: none" class="prev fontawesome-angle-left"></span> 
+      <span class="prev fontawesome-angle-left"></span> 
       <b class='page-number'>1</b> 
       <span data-page="2" class="next fontawesome-angle-right"></span>
   </body>

@@ -32,6 +32,7 @@ var puppieGenerator = {
       'content_type=1&' +
       'sort='+sort+'&' +
       'per_page=20&' +
+      'extras=url_m&' +
       'page='+page
     },
 
@@ -43,9 +44,11 @@ var puppieGenerator = {
    */
   requestPuppies: function() {
     var req = new XMLHttpRequest();
+    $( "#results" ).undelegate( "img", "click", puppieGenerator.showPhoto_ );
     req.open("GET", this.searchOnFlickr_(), true);
     req.onload = this.showPhotos_.bind(this);
     req.send(null);
+    $( "#results" ).delegate( "img", "click", puppieGenerator.showPhoto_ );
   },
 
   /**
@@ -58,13 +61,14 @@ var puppieGenerator = {
    */
   showPhotos_: function (e) {
     target = e.target;
-    $('img').remove();
+    $('#results img').remove();
     pages = $( e.target.responseXML ).find('photos').attr('pages');
     var puppies = e.target.responseXML.querySelectorAll('photo');
     for (var i = 0; i < puppies.length; i++) {
       var img = document.createElement('img');
       img.src = this.constructPuppiesURL_(puppies[i]);
       img.setAttribute('alt', puppies[i].getAttribute('title'));
+      img.setAttribute('data-m-url', puppies[i].getAttribute('url_m'));
       $('#results').append(img);
     }
   },
@@ -85,13 +89,32 @@ var puppieGenerator = {
         "_s.jpg";
   },
 
-  
   /**
    * Updates page permutation
    */
-  expandPhoto_: function() {
-    console.log($(this));
-    console.log($(this).data("m-url"));
+  updatePage_: function() {
+    if(page == pages) {
+      $('footer .next').hide()  
+    } else {
+      $('footer .next').data("page",page+1).show();
+    }
+
+    if(page != 1){
+      $('footer .prev').data("page",page-1).show();
+    } else {
+      $('footer .prev').hide();
+    }
+
+    $('.page-number').text(page);
+  },
+
+  showPhoto_: function() {
+    $('#photo').show().children()[0].setAttribute('src',$(this).data("m-url"))
+    $('#results, footer').hide();
+  },
+  hidePhoto_: function() {
+    $('#photo').hide()
+    $('#results, footer').show();
   }
 };
 
@@ -107,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     puppieGenerator.updatePage_();
     puppieGenerator.requestPuppies();
+    $( "#results" ).delegate( "img", "click", expandPhoto_ );
 
   });
 
@@ -127,7 +151,8 @@ document.addEventListener('DOMContentLoaded', function () {
       page = 1;
       puppieGenerator.updatePage_();
       puppieGenerator.requestPuppies();
-
     }
   });
+  $("#photo").bind("click", puppieGenerator.hidePhoto_ );
+
 });
