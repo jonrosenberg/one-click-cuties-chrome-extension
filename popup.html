@@ -3,6 +3,14 @@
   <head>
     <title>Getting Started Extension's Popup</title>
     <style>
+      @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+      /* fontawesome */
+      
+      [class*="fontawesome-"]:before {
+        font-family: 'FontAwesome', sans-serif;
+      }
+      
       body {
         min-width: 357px;
         overflow-x: hidden;
@@ -15,6 +23,18 @@
         width: 75px;
         height: 75px;
       }
+
+      footer {
+        text-align: center;
+        font-family: "Helvetica Neue", "Helvetica", sans-serif; 
+        font-size: 18px;
+        
+      }
+      footer span {
+        color: blue;
+        cursor: pointer;
+        padding: 0 5px;
+      }
     </style>
 
     <!--
@@ -23,9 +43,23 @@
       -
       - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
      -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="popup.js"></script>
   </head>
   <body>
+    <div id='results'></div>
+    <footer>
+      <select>
+          <option value="relevance">Relevant</option>
+          <option value="date-posted-desc">Recent</option>
+          <option value="interestingness-desc" selected>Interesting</option>
+      </select> 
+      <input type="text" class="search" name="search">
+      <span class="search fontawesome-search"></span> 
+      <span data-page="1" class="home fontawesome-double-angle-left"></span> 
+      <span style="display: none" class="prev fontawesome-angle-left"></span> 
+      <b class='page-number'>1</b> 
+      <span data-page="2" class="next fontawesome-angle-right"></span>
   </body>
 </html>
 
