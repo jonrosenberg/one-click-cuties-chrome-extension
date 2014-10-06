@@ -1,0 +1,1 @@
+zip cozy-button.zip *.png *.js *.html *.json *.css
