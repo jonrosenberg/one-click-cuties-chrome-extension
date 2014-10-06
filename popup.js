@@ -12,6 +12,7 @@ var QUERY = 'puppies';
 var page = 1;
 var pages = 999;
 var sort = 'interestingness-desc';
+var isBrowsing = true;
 var target;
 var puppieGenerator = {
   /**
@@ -93,10 +94,10 @@ var puppieGenerator = {
    * Updates page permutation
    */
   updatePage_: function() {
-    if(page == pages) {
-      $('footer .next').hide()  
-    } else {
+    if(page != pages) {
       $('footer .next').data("page",page+1).show();
+    } else {
+      $('footer .next').hide()  
     }
 
     if(page != 1){
@@ -109,10 +110,13 @@ var puppieGenerator = {
   },
 
   showPhoto_: function() {
+    isBrowsing = false;
     $('#photo').show().children()[0].setAttribute('src',$(this).data("m-url"))
     $('#results, footer').hide();
+    
   },
   hidePhoto_: function() {
+    isBrowsing = true;
     $('#photo').hide()
     $('#results, footer').show();
   }
@@ -121,6 +125,8 @@ var puppieGenerator = {
 // Run our puppie generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
   puppieGenerator.requestPuppies();
+
+  // Click search or page
   $('footer span').bind( "click", function() {
     if($( this ).hasClass('search')){
       QUERY = $('footer input').val();
@@ -134,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   });
 
+  // 
   $('footer select').on( "change", function() {
     page = 1;
     sort = $( this ).val();
@@ -141,8 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
     puppieGenerator.requestPuppies();
   } )
 
-  $( "footer input" ).keypress(function( event ) {
+  $( "body" ).keydown(function( event ) {
+    // right arrow
     if ( event.which == 13) {
+
       if($('footer input').val().trim().length != 0) {
         QUERY = $('footer input').val();
       } else {
@@ -151,7 +160,20 @@ document.addEventListener('DOMContentLoaded', function () {
       page = 1;
       puppieGenerator.updatePage_();
       puppieGenerator.requestPuppies();
+    } 
+    // left arrow
+    else if (isBrowsing &event.which == 37 && page != 1) {
+      page -= 1;
+      puppieGenerator.updatePage_();
+      puppieGenerator.requestPuppies();
     }
+    // right arrow
+    else if (isBrowsing & event.which == 39 && page != pages) {
+      page += 1;
+      puppieGenerator.updatePage_();
+      puppieGenerator.requestPuppies();
+    }
+
   });
   $("#photo").bind("click", puppieGenerator.hidePhoto_ );
 

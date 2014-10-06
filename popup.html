@@ -22,9 +22,31 @@
         vertical-align: middle;
         cursor: pointer;
       }
+
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #6495ED;
+        border: solid #6495ED 2px;
+        border-radius: 50%;
+        display: inline-block;
+        height: 22px;
+        width: 22px;
+        transition-duration: .5s;
+        -webkit-transition-duration: .5s;
+      }
+      a:hover {
+        color: #fff;
+        background-color: #6495ED
+      }
+
       #results img {
         width: 75px;
         height: 75px;
+      }
+
+      input {
+        width: 100px;
       }
 
       footer {
@@ -36,7 +58,7 @@
       footer span {
         color: #6495ED;
         cursor: pointer;
-        padding: 0 5px;
+        padding: 0 3px;
       }
       footer span.prev, #photo {
         display: none;
@@ -68,7 +90,7 @@
       <span data-page="1" class="home fontawesome-double-angle-left"></span> 
       <span class="prev fontawesome-angle-left"></span> 
       <b class='page-number'>1</b> 
-      <span data-page="2" class="next fontawesome-angle-right"></span>
+      <span data-page="2" class="next fontawesome-angle-right"></span> <a href="http://www.rosenbergj.com/cozy-button-one-click-cuteness/" title="info / feedback" target="_blank">!</a>
   </body>
 </html>
 
