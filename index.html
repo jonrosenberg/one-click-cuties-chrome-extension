@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>One Click Cozy</title>
+    <link rel="stylesheet" href="popup.css"/>
+
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="jquery.endless-scroll.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="http://www.rosenbergj.com/cozy-button-one-click-cuteness/" title="info / feedback" target="_blank">!</a>
+      <a class='download' href="http://pbs.twimg.com/media/B2SRmtmIEAAwcfZ.jpg" download="B2SRmtmIEAAwcfZ.jpg" title="Download this image" style="display:none">
+          <span class='fontawesome-angle-down'> </span>
+      </a>
+      </header>
+    <div id='photo'><img src='' /></div>
+    <div id='results'></div>
+    <span id='loading' class='fontawesome-refresh'> </span>
+    
+  </body>
+</html>
+

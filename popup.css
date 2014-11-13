@@ -1,0 +1,82 @@
+  @import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+      /* fontawesome */
+      
+      [class*="fontawesome-"]:before {
+        font-family: 'FontAwesome', sans-serif;
+      }
+      
+      body {
+        min-width: 357px;
+        overflow-x: hidden;
+      }
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        color: #6495ED;
+        border: solid #6495ED 2px;
+        border-radius: 50%;
+        display: inline-block;
+        height: 22px;
+        width: 22px;
+        transition-duration: .5s;
+        -webkit-transition-duration: .5s;
+      }
+      a:hover {
+        color: #fff;
+        background-color: #6495ED
+      }
+
+      #results {
+          -webkit-column-count: 4;
+          -webkit-column-gap: 10px;
+          -webkit-column-fill: auto;
+          column-count: 4;
+          column-gap: 15px;
+          column-fill: auto;
+      }
+
+      #results img {
+        width: 75px;
+        /*height: 75px;*/
+      }
+      #loading {
+        font-family: 'FontAwesome', sans-serif;
+        text-align: center;
+        width: 100%;
+        display: inline-block;
+        font-size: 30px;
+        padding: 16px 0;
+        -webkit-animation: cssAnimation 1s infinite linear;
+      }
+      @-webkit-keyframes cssAnimation {
+      from { -webkit-transform: rotate(0deg); }
+      to { -webkit-transform: rotate(360deg); }
+      }
+
+      input {
+        width: 100px;
+      }
+
+      header {
+        text-align: center;
+        font-family: "Helvetica Neue", "Helvetica", sans-serif; 
+        font-size: 18px;
+        
+      }
+      header span {
+        cursor: pointer;
+        padding: 0 3px;
+      }
+      header span.prev, #photo {
+        display: none;
+      }
+
