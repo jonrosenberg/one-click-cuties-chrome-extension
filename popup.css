@@ -34,8 +34,10 @@
         color: #fff;
         background-color: #6495ED
       }
-
       #results {
+        text-align: center;
+      }
+      #results .page {
           -webkit-column-count: 4;
           -webkit-column-gap: 10px;
           -webkit-column-fill: auto;

@@ -54,6 +54,7 @@ var occ = {
     var req = $.getJSON( herokuServer+nextUrl );
     req.done(function(data) {
       console.log( "success" );
+      occ.xfinityScrollCount++
       occ.showPhotos_(data);
       $("#results").delegate( "img", "click", occ.showPhoto_ );
       console.log( "nextUrl: " + data.nextUrl );
@@ -85,13 +86,16 @@ var occ = {
     //$('#results img').remove();
     //pages = $( e.target.responseXML ).find('photos').attr('pages');
     var cuties = data.media;
+    $('#results').append('<h1>---- Page '+occ.xfinityScrollCount+' ----</h1><div id="page-'+occ.xfinityScrollCount+'" class="page"></div>')
     for (var i = 0; i < cuties.length; i++) {
       var img = document.createElement('img');
       img.src = cuties[i].media_url;
       //img.setAttribute('alt', cuties[i].getAttribute('title'));
       img.setAttribute('data-m-url', cuties[i].media_url);
-      $('#results').append(img);
+      $('#results #page-'+occ.xfinityScrollCount).append(img);
     }
+
+
   },
 
   /**
@@ -160,11 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
   {
       if( occ.isScrolledToBottom() && !isLoading )
       {
-          console.log("load more...");
-          console.log(occ.hUrl);
           occ.requestCuties(occ.hUrl);
-          occ.xfinityScrollCount++
-          console.log(occ.xfinityScrollCount);
       }
   });
   
