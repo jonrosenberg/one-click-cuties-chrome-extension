@@ -82,7 +82,6 @@ var occ = {
    * @private
    */
   showPhotos_: function (data) {
-    
     //$('#results img').remove();
     //pages = $( e.target.responseXML ).find('photos').attr('pages');
     var cuties = data.media;
@@ -134,23 +133,27 @@ var occ = {
   },
 
   showPhoto_: function() {
-    isLoading = true;
+    if(isBrowsing) {
+      occ.scrollTopPosition = $(window).scrollTop();
+      console.log(occ.scrollTopPosition);
+
+      $('#photo').show().children()[0].setAttribute('src',$(this).data("m-url"));
+      $('.download').show().attr('href',$(this).data("m-url")).attr('download',$(this).data("m-url").split('/').pop());
+      $('#results').hide();
+    }
     isBrowsing = false;
-    occ.scrollTopPosition = $(window).scrollTop();
-    console.log(occ.scrollTopPosition);
-    $('#photo').show().children()[0].setAttribute('src',$(this).data("m-url"));
-    $('.download').show().attr('href',$(this).data("m-url")).attr('download',$(this).data("m-url").split('/').pop());
-    $('#results').hide();
-    
   },
   hidePhoto_: function() {
+    
+    if(!isBrowsing){
+      $('#photo').hide();
+      $('.download').hide();
+      $('#results').show();
+      console.log(occ.scrollTopPosition);
+      $(window).scrollTop(occ.scrollTopPosition);
+    }
     isBrowsing = true;
-    $('#photo').hide();
-    $('.download').hide();
-    $('#results').show();
-    console.log(occ.scrollTopPosition);
-    $(window).scrollTop(occ.scrollTopPosition);
-    isLoading = false;
+    
   },
   isScrolledToBottom: function() {
     return $(window).scrollTop() == $(document).height() - $(window).height();
